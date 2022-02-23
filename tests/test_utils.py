@@ -179,17 +179,17 @@ def test_get_resource_name_with_errors(status_code):
 @pytest.mark.parametrize(
     "format_type,output",
     [
-        (False, {"full_name": {"last-name": "a", "first-name": "b"}}),
-        ("camelize", {"fullName": {"last-name": "a", "first-name": "b"}}),
-        ("capitalize", {"FullName": {"last-name": "a", "first-name": "b"}}),
+        (False, {"full_name": {"last_name": "a", "first_name": "b"}}),
+        ("camelize", {"fullName": {"lastName": "a", "firstName": "b"}}),
+        ("capitalize", {"FullName": {"LastName": "a", "FirstName": "b"}}),
         ("dasherize", {"full-name": {"last-name": "a", "first-name": "b"}}),
-        ("underscore", {"full_name": {"last-name": "a", "first-name": "b"}}),
+        ("underscore", {"full_name": {"last_name": "a", "first_name": "b"}}),
     ],
 )
 def test_format_field_names(settings, format_type, output):
     settings.JSON_API_FORMAT_FIELD_NAMES = format_type
 
-    value = {"full_name": {"last-name": "a", "first-name": "b"}}
+    value = {"full_name": {"last_name": "a", "first_name": "b"}}
     assert format_field_names(value, format_type) == output
 
 

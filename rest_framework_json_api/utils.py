@@ -110,7 +110,10 @@ def format_field_names(obj, format_type=None):
         formatted = OrderedDict()
         for key, value in obj.items():
             key = format_value(key, format_type)
-            formatted[key] = value
+            if isinstance(obj, dict):
+                formatted[key] = format_field_names(value, format_type)
+            else:
+                formatted[key] = value
         return formatted
 
     return obj
